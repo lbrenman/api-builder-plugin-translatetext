@@ -1,0 +1,123 @@
+flow-nodes:
+  translatetext:
+    name: Translate Text
+    icon: icon.svg
+    description: Translate text between two languages.
+    category: NLP
+    methods:
+      translateText: # This same key is used in `actions.js`
+        name: Translate Text
+        description: Translate text.
+        parameters:
+          Text:
+            name: Text
+            description: The text to translate. The text string can be a maximum of 5,000 bytes long. Depending on your character set, this may be fewer than 5,000 characters.
+            required: true
+            initialType: string
+            schema:
+              type: string
+          TargetLanguageCode:
+            name: Target Language Code
+            description: The language code requested for the language of the target text. The language must be a language supported by Amazon Translate (https://docs.aws.amazon.com/translate/latest/dg/what-is.html#what-is-languages).
+            required: true
+            initialType: string
+            schema:
+              type: string
+              enum:
+              - af
+              - sq
+              - am
+              - ar
+              - hy
+              - az
+              - bn
+              - bs
+              - bg
+              - ca
+              - zh
+              - zh-TW
+              - hr
+              - cs
+              - da
+              - fa-AF
+              - nl
+              - en
+              - et
+              - fa
+              - tl
+              - fi
+              - fr
+              - fr-CA
+              - ka
+              - de
+              - el
+              - gu
+              - ht
+              - ha
+              - he
+              - hi
+              - hu
+              - is
+              - id
+              - it
+              - ja
+              - kn
+              - kk
+              - ko
+              - lv
+              - lt
+              - mk
+              - ms
+              - ml
+              - mt
+              - mn
+              - no
+              - ps
+              - pl
+              - pt
+              - ro
+              - ru
+              - sr
+              - si
+              - sk
+              - sl
+              - so
+              - es
+              - es-MX
+              - sw
+              - sv
+              - ta
+              - te
+              - th
+              - tr
+              - uk
+              - ur
+              - uz
+              - vi
+              - cy
+        # "Next" (next) output
+        returns:
+          name: Next
+          description: The operation was successful.
+          context: $.translateResult
+          schema:
+            type: object
+            properties:
+              TranslatedText:
+                type: string
+              TargetLanguageCode:
+                type: string
+              SourceLanguageCode:
+                type: string
+              AppliedTerminologies:
+                type: array
+        # "Error" (error) output
+        throws:
+          name: Error
+          description: An unexpected error was encountered.
+          context: $.translateError
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
