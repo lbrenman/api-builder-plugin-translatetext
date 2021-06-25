@@ -1,7 +1,7 @@
 flow-nodes:
   translatetext:
     name: Translate Text
-    icon: icon.svg
+    icon: amazon-comprehend.svg
     description: Translate text between two languages.
     category: NLP
     methods:
