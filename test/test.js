@@ -20,11 +20,11 @@ describe('flow-node translatetext', () => {
 			expect(flowNode).to.be.a('object');
 
 			// Ensure the flow-node matches the spec
-			expect(flowNode.name).to.equal('Hello World');
-			expect(flowNode.description).to.equal('Example flow-node to say hello.');
+			expect(flowNode.name).to.equal('Translate Text');
+			expect(flowNode.description).to.equal('Translate text between two languages.');
 			expect(flowNode.icon).to.be.a('string');
 			expect(flowNode.getMethods()).to.deep.equal([
-				'hello'
+				'translateText'
 			]);
 		});
 
@@ -38,22 +38,22 @@ describe('flow-node translatetext', () => {
 		});
 	});
 
-	describe('#hello', () => {
+	describe('#translateText', () => {
 		it('should error when missing required parameter', async () => {
 			// Invoke #hello with a non-number and check error.
-			const { value, output } = await flowNode.hello({
-				name: null
+			const { value, output } = await flowNode.translateText({
+				Text: null
 			});
 
 			expect(value).to.be.instanceOf(Error)
-				.and.to.have.property('message', 'Missing required parameter: name');
+				.and.to.have.property('message', 'Missing required parameter: Text');
 			expect(output).to.equal('error');
 		});
 
 		it('should succeed with valid argument', async () => {
-			const { value, output } = await flowNode.hello({ name: 'World' });
+			const { value, output } = await flowNode.translateText({ Text: 'Hello', TargetLanguageCode: 'es' });
 
-			expect(value).to.equal('Hello World');
+			expect(value.TranslatedText).to.equal('Hola');
 			expect(output).to.equal('next');
 		});
 	});
